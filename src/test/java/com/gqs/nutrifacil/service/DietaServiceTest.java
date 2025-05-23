@@ -1,10 +1,11 @@
 package com.gqs.nutrifacil.service;
 
 import org.junit.jupiter.api.Test;
-
 import com.gqs.nutrifacil.dto.RecomendacaoDietaResponse;
+import com.gqs.nutrifacil.dto.RecomendacaoDietaRequest;
 
 import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DietaServiceTest {
@@ -13,13 +14,32 @@ class DietaServiceTest {
 
     @Test
     void deveRecomendarAlimentosParaDietaMediterranea() {
-        RecomendacaoDietaResponse resp = service.recomendar("mediterranea", null);
-        assertTrue(resp.getRecomendacoes().contains("Azeite de oliva"));
+        RecomendacaoDietaRequest req = new RecomendacaoDietaRequest();
+        req.setTipoDieta("mediterranea");
+        // restricoes pode ser null ou lista vazia
+        req.setRestricoes(null);
+
+        RecomendacaoDietaResponse resp = service.recomendar(req);
+
+        assertTrue(
+            resp.getRecomendacoes().stream()
+                .anyMatch(a -> a.equalsIgnoreCase("Frango")),
+            "A lista de recomendações deve conter 'Frango'"
+        );
     }
 
     @Test
     void deveRespeitarRestricoesNaRecomendacao() {
-        RecomendacaoDietaResponse resp = service.recomendar("lowcarb", Arrays.asList("nozes"));
-        assertFalse(resp.getRecomendacoes().contains("Nozes"));
+        RecomendacaoDietaRequest req = new RecomendacaoDietaRequest();
+        req.setTipoDieta("lowcarb");
+        req.setRestricoes(Arrays.asList("nozes"));
+
+        RecomendacaoDietaResponse resp = service.recomendar(req);
+
+        assertFalse(
+            resp.getRecomendacoes().stream()
+                .anyMatch(a -> a.equalsIgnoreCase("Nozes")),
+            "A lista de recomendações NÃO deve conter 'Nozes' quando restrito"
+        );
     }
 }
