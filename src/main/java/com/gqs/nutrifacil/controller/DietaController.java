@@ -17,6 +17,6 @@ public class DietaController {
 
     @PostMapping("/recomendar")
     public RecomendacaoDietaResponse recomendar(@RequestBody RecomendacaoDietaRequest req) {
-        return dietaService.recomendar(req.getTipoDieta(), req.getRestricoes());
+        return dietaService.recomendar(req);
     }
 }
