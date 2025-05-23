@@ -15,7 +15,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Libera todos os endpoints
-                        .allowedOrigins("http://localhost:3000") // Permite seu frontend
+                        .allowedOrigins("http://localhost:3000", "https://nutrifacil-web-production.up.railway.app") // Permite seu frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
                         .allowedHeaders("*")
                         .allowCredentials(true);
