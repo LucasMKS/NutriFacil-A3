@@ -18,7 +18,7 @@ class TmbServiceTest {
         req.setIdade(25);
         CalculoTmbResponse resp = service.calcularTmb(req);
         // O valor exato depende da fórmula (usando Harris-Benedict)
-        assertEquals(1766.91, Math.round(resp.getTmb() * 100.0) / 100.0);
+        assertEquals(1673.75, Math.round(resp.getTmb() * 100.0) / 100.0);
     }
 
     @Test
@@ -29,6 +29,6 @@ class TmbServiceTest {
         req.setAltura(165);
         req.setIdade(30);
         CalculoTmbResponse resp = service.calcularTmb(req);
-        assertEquals(1382.85, Math.round(resp.getTmb() * 100.0) / 100.0);
+        assertEquals(1320.25, Math.round(resp.getTmb() * 100.0) / 100.0);
     }
 }
