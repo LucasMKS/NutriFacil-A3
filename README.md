@@ -1,6 +1,6 @@
 # NutriFácil
 
-<img src="https://prnt.sc/rmL1fsHOPLh0" alt="Página inicial do NutriFácil" style="max-width: 600px; border-radius: 16px; margin-bottom: 24px;">
+<img src="https://i.imgur.com/4uuO8th.png" alt="Página inicial do NutriFácil" style="max-width: 600px; border-radius: 16px; margin-bottom: 24px;">
 
 ---
 
