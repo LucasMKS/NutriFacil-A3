@@ -51,20 +51,31 @@ public class DietaService {
     }
 
     // Métodos auxiliares
-
     private List<String> getBaseProteinas(String tipoDieta) {
         switch (tipoDieta.toLowerCase()) {
             case "lowcarb":
             case "cetogenica":
-                return new ArrayList<>(Arrays.asList("Frango", "Peixe", "Ovos", "Tofu", "Carne magra"));
+                return new ArrayList<>(Arrays.asList(
+                    "Frango", "Peixe", "Ovos", "Tofu", "Carne magra",
+                    "Grão de bico", "Feijão", "Lentilha"
+                ));
             case "vegetariana":
-                return new ArrayList<>(Arrays.asList("Ovos", "Tofu", "Grão de bico", "Feijão", "Lentilha"));
+                return new ArrayList<>(Arrays.asList(
+                    "Ovos", "Tofu", "Grão de bico", "Feijão", "Lentilha"
+                ));
             case "mediterranea":
-                return new ArrayList<>(Arrays.asList("Azeite de Olivia", "Peixe", "Grãos Integrais", "Legumes", "Frutas"));
+                return new ArrayList<>(Arrays.asList(
+                    "Peixe", "Frango", "Ovos", "Iogurte", "Tofu",
+                    "Grão de bico", "Feijão", "Lentilha"
+                ));
             default:
-                return new ArrayList<>(Arrays.asList("Peixe", "Frango", "Ovos", "Iogurte", "Tofu"));
+                return new ArrayList<>(Arrays.asList(
+                    "Peixe", "Frango", "Ovos", "Iogurte", "Tofu",
+                    "Grão de bico", "Feijão", "Lentilha"
+                ));
         }
     }
+
     private List<String> getBaseLegumes() {
         return new ArrayList<>(Arrays.asList("Cenoura", "Abobrinha", "Berinjela", "Vagem", "Beterraba"));
     }
@@ -76,6 +87,7 @@ public class DietaService {
             return new ArrayList<>(Arrays.asList("Batata-doce", "Quinoa", "Arroz integral"));
         return new ArrayList<>(Arrays.asList("Arroz integral", "Macarrão integral", "Quinoa", "Batata-doce"));
     }
+
     private void removerAlergias(List<String> proteinas, List<String> legumes, List<String> verduras, List<String> carboidratos, List<String> alergias) {
         if (alergias.stream().anyMatch(a -> a.equalsIgnoreCase("Lactose") || a.equalsIgnoreCase("Proteína do leite"))) {
             proteinas.removeIf(p -> p.toLowerCase().contains("iogurte") || p.toLowerCase().contains("leite") || p.toLowerCase().contains("whey"));
