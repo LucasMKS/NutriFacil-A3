@@ -17,14 +17,11 @@ public class DietaService {
         List<String> carboidratos = getBaseCarboidratos(req.getTipoDieta());
 
         // Aplicar preferências (se não vazio, filtrar para manter só as preferidas)
-        if (req.getPreferenciasProteinas() != null && !req.getPreferenciasProteinas().isEmpty())
-            proteinas.retainAll(req.getPreferenciasProteinas());
-        if (req.getPreferenciasLegumes() != null && !req.getPreferenciasLegumes().isEmpty())
-            legumes.retainAll(req.getPreferenciasLegumes());
-        if (req.getPreferenciasVerduras() != null && !req.getPreferenciasVerduras().isEmpty())
-            verduras.retainAll(req.getPreferenciasVerduras());
-        if (req.getPreferenciasCarboidratos() != null && !req.getPreferenciasCarboidratos().isEmpty())
-            carboidratos.retainAll(req.getPreferenciasCarboidratos());
+        proteinas = aplicarPreferencias(proteinas, req.getPreferenciasProteinas());
+        legumes = aplicarPreferencias(legumes, req.getPreferenciasLegumes());
+        verduras = aplicarPreferencias(verduras, req.getPreferenciasVerduras());
+        carboidratos = aplicarPreferencias(carboidratos, req.getPreferenciasCarboidratos());
+
 
         // Remover itens de acordo com alergias/intolerâncias
         if (req.getAlergiasIntolerancias() != null && !req.getAlergiasIntolerancias().isEmpty() &&
@@ -49,6 +46,21 @@ public class DietaService {
 
         return new RecomendacaoDietaResponse(recomendacoes);
     }
+
+    private List<String> aplicarPreferencias(List<String> base, List<String> preferencias) {
+    if (preferencias == null || preferencias.isEmpty()) {
+        return base;
+    }
+
+    List<String> filtrado = new ArrayList<>();
+    for (String item : base) {
+        if (preferencias.contains(item)) {
+            filtrado.add(item);
+        }
+    }
+    return filtrado;
+}
+
 
     // Métodos auxiliares
     private List<String> getBaseProteinas(String tipoDieta) {
